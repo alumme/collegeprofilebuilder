@@ -33,6 +33,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
+    @IBAction func addButtonTapped(sender: UIBarButtonItem)
+    {
+        let myAlert = UIAlertController(title: "Add College", message: nil, preferredStyle: .Alert)
+        myAlert.addTextFieldWithConfigurationHandler { (nameTextField) -> Void in
+            nameTextField.placeholder = "Add college name here"
+        }
+        myAlert.addTextFieldWithConfigurationHandler { (locationTextField) -> Void in
+            locationTextField.placeholder = "Add location here"
+        }
+        myAlert.addTextFieldWithConfigurationHandler { (populationTextField) -> Void in
+            populationTextField.placeholder = "Add population here"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        myAlert.addAction(cancelAction)
+        let addAction = UIAlertAction(title: "Add", style: .Default) { (addAction) -> Void in
+            let nameTF = myAlert.textFields![0] as UITextField
+            let locationTF = myAlert.textFields![1] as UITextField
+            let populationTF =  myAlert.textFields![2] as UITextField
+            self.colleges.append(CollegeClass(Name: nameTF.text!, Location: locationTF.text!, numberOfStudents: Int(populationTF.text!)!))
+            self.myTableView.reloadData()
+        }
+        myAlert.addAction(addAction)
+        //presents alert view
+        self.presentViewController(myAlert, animated: true, completion: nil)
+    }
+    
+    
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {

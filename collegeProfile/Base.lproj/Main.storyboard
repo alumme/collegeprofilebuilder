@@ -55,7 +55,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZcH-I9-BV9">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="YLX-MS-iXX"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="nXN-Tl-F6b"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="nXN-Tl-F6b">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="vyM-0f-g9k"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>

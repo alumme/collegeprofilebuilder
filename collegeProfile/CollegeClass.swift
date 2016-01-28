@@ -25,10 +25,10 @@ class CollegeClass: NSObject
         students = numberOfStudents
     }
     
-    init(Name: String, Location: String)
+    init(Name: String, Location: String, numberOfStudents: Int)
     {
-        super.init()
         name = Name
         location = Location
+        students = numberOfStudents
     }
 }
