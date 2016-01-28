@@ -54,7 +54,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZcH-I9-BV9">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="YLX-MS-iXX"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="YLX-MS-iXX">
+                            <connections>
+                                <action selector="editButtonTapped:" destination="BYZ-38-t0r" id="Ar2-Jr-tzZ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="nXN-Tl-F6b">
                             <connections>
                                 <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="vyM-0f-g9k"/>
@@ -63,6 +67,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="editButton" destination="YLX-MS-iXX" id="8JV-rB-9nl"/>
                         <outlet property="myTableView" destination="y12-al-URh" id="POn-B6-n9Q"/>
                     </connections>
                 </viewController>
@@ -103,6 +108,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4DT-wQ-ycQ">
                                 <rect key="frame" x="164" y="314" width="46" height="30"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="ToR-OG-Wr1" eventType="touchUpInside" id="8Wf-xe-a2Z"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

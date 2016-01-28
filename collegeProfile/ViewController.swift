@@ -18,11 +18,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var colleges : [CollegeClass] = []
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         myTableView.dataSource = self
         myTableView.delegate = self
+        editButton.tag = 0
         colleges.append(CollegeClass(Name: "Stanford University", Location: "Stanford, California", Image: UIImage(named: "stanford")!, numberOfStudents: 16136))
         colleges.append(CollegeClass(Name: "Indiana University", Location: "Bloomington, Indiana", Image: UIImage(named: "Indiana")!, numberOfStudents: 48514))
         colleges.append(CollegeClass(Name: "University of Wisconsin", Location: "Madison, Wisconsin", Image: UIImage(named: "wisconsin")!, numberOfStudents: 43193))
@@ -60,6 +64,44 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    @IBAction func editButtonTapped(sender: UIBarButtonItem)
+    {
+        if editButton.tag == 0
+        {
+            myTableView.editing = true
+            editButton.tag = 1
+        }
+        else
+        {
+            myTableView.editing = false
+            editButton.tag = 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == .Delete
+        {
+            colleges.removeAtIndex(indexPath.row)
+            myTableView.reloadData()
+        }
+    
+        
+    }
+    
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
+    {
+        let college = colleges[sourceIndexPath.row]
+        colleges.removeAtIndex(sourceIndexPath.row)
+        colleges.insert(college, atIndex: destinationIndexPath.row)
+    }
+    
+    
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -73,6 +115,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return colleges.count
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        myTableView.reloadData()
     }
     
     
