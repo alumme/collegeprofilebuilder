@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class DetailViewController: UIViewController
+class DetailViewController: UIViewController, SFSafariViewControllerDelegate
 {
     
     @IBOutlet weak var collegeImage: UIImageView!
@@ -19,6 +20,9 @@ class DetailViewController: UIViewController
     
     @IBOutlet weak var populationText: UITextField!
     
+
+    @IBOutlet weak var websiteLink: UITextField!
+    
     var college : CollegeClass!
     
     override func viewDidLoad()
@@ -28,6 +32,7 @@ class DetailViewController: UIViewController
         nameText.text = college.name
         locationText.text = college.location
         populationText.text = String(college.students)
+        websiteLink.text = college.link
 
 
     }
@@ -40,6 +45,20 @@ class DetailViewController: UIViewController
         college.students = Int(populationText.text!)!
     }
     
+    
+    @IBAction func websiteButtonTapped(sender: UIButton) {
+        var url = NSURL(string: college.link)
+        var svc = SFSafariViewController(URL: url!)
+        svc.delegate = self
+        presentViewController(svc, animated: true, completion: nil)
+    }
+    
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+
 
 
 

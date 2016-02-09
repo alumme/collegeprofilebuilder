@@ -27,9 +27,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         myTableView.dataSource = self
         myTableView.delegate = self
         editButton.tag = 0
-        colleges.append(CollegeClass(Name: "Stanford University", Location: "Stanford, California", Image: UIImage(named: "stanford")!, numberOfStudents: 16136))
-        colleges.append(CollegeClass(Name: "Indiana University", Location: "Bloomington, Indiana", Image: UIImage(named: "Indiana")!, numberOfStudents: 48514))
-        colleges.append(CollegeClass(Name: "University of Wisconsin", Location: "Madison, Wisconsin", Image: UIImage(named: "wisconsin")!, numberOfStudents: 43193))
+        colleges.append(CollegeClass(Name: "Stanford University", Location: "Stanford, California", Image: UIImage(named: "stanford")!, numberOfStudents: 16136, Link: "https://www.stanford.edu/"))
+        colleges.append(CollegeClass(Name: "Indiana University", Location: "Bloomington, Indiana", Image: UIImage(named: "Indiana")!, numberOfStudents: 48514, Link: "https://www.indiana.edu/"))
+        colleges.append(CollegeClass(Name: "University of Wisconsin", Location: "Madison, Wisconsin", Image: UIImage(named: "wisconsin")!, numberOfStudents: 43193, Link: "http://www.wisc.edu/"))
         
         
     }
@@ -49,12 +49,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         myAlert.addTextFieldWithConfigurationHandler { (populationTextField) -> Void in
             populationTextField.placeholder = "Add population here"
         }
+        myAlert.addTextFieldWithConfigurationHandler { (linkTextField) -> Void in
+            linkTextField.placeholder = "Add link here"
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
         myAlert.addAction(cancelAction)
         let addAction = UIAlertAction(title: "Add", style: .Default) { (addAction) -> Void in
             let nameTF = myAlert.textFields![0] as UITextField
             let locationTF = myAlert.textFields![1] as UITextField
             let populationTF =  myAlert.textFields![2] as UITextField
+            let linkTF = myAlert.textFields![3] as UITextField
             self.colleges.append(CollegeClass(Name: nameTF.text!, Location: locationTF.text!, numberOfStudents: Int(populationTF.text!)!))
             self.myTableView.reloadData()
         }
